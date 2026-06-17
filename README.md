@@ -112,10 +112,13 @@ clone:
 1. In `deploy/envs/values-dev.yaml` (and staging/prod if you use them), replace
    `ec-0X` in the `host:` with your participant number, e.g.
    `ec-06-pricingservice-dev.ff26.it`.
-2. In `argocd/app-dev.yaml` (and staging/prod if you use them), set `repoURL` to
+2. In `deploy/chart/values.yaml`, replace `ec-0X` in the image `repository`
+   (`registry.ff26.it/ec-0X/workshop-application`) with your participant number,
+   so it points at your own namespace on the registry.
+3. In `argocd/app-dev.yaml` (and staging/prod if you use them), set `repoURL` to
    your config-repo URL. It must match the `url` you'll put in
    `repo-secret.yaml` (Step 4).
-3. Leave `image.tag: "REPLACE_ME"` for now. You'll set it in Step 7 once you've
+4. Leave `image.tag: "REPLACE_ME"` for now. You'll set it in Step 7 once you've
    built an image. Until then the pod will be `ImagePullBackOff`, which is
    expected, and you'll *see* it in the Argo UI.
 
@@ -220,6 +223,11 @@ curl -s -X POST https://ec-0X-pricingservice-dev.ff26.it/quote \
   -H 'Content-Type: application/json' -d '{"subtotal": 150.00}'
 # {"subtotal":150.00,"total":135.00}
 ```
+
+> Don't want to wait for the poll? In the Argo CD UI you can hit **Refresh** to
+> re-check Git now, then **Sync** to reconcile immediately. This also kicks the
+> app out of any retry backoff left over from the earlier `ImagePullBackOff`,
+> rather than waiting for the retry timer.
 
 That's the full GitOps loop: **you changed Git, the cluster followed. No
 `kubectl apply` of the app, no `kubectl set image`.**
