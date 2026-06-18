@@ -7,12 +7,12 @@ image:
   # Replace REPLACE_ME with the tag you pushed, e.g. a1b2c3d
   # (see the README: tag = <git short sha>; your per-user namespace lives in
   # the image repository, set in deploy/chart/values.yaml).
-  tag: "REPLACE_ME"
+  tag: "1fdd40c"
 
 ingress:
   enabled: true
   # Replace 0X with your participant number, e.g. ec-06-pricingservice-dev.ff26.it
-  host: ec-0X-pricingservice-dev.ff26.it
+  host: ec-02-pricingservice-dev.ff26.it
 
 resources:
   requests:
