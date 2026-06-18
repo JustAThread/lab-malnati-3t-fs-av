@@ -7,7 +7,7 @@ image:
   # Replace REPLACE_ME with the tag you pushed, e.g. a1b2c3d
   # (see the README: tag = <git short sha>; your per-user namespace lives in
   # the image repository, set in deploy/chart/values.yaml).
-  tag: "1fdd40c"
+  tag: "1fdd40cE"
 
 ingress:
   enabled: true
